@@ -1,39 +1,20 @@
-import argparse
+from random import randint
+from os import mkdir
+ops = ('insert', 'search', 'remove')
 
-DEFAULT_DESCRIPTION = 'CSV dataset generator script demo.'
-DEFAULT_SAMPLES = 100
-
-
-def parse_args():
-    """
-    Парсинг аргументов командной строки (CLI).
-    :return интерфейс для работы с аргументами.
-
-    Больше информации на https://docs.python.org/3.7/howto/argparse.html
-    """
-    parser = argparse.ArgumentParser(description=DEFAULT_DESCRIPTION)
-
-    parser.add_argument('output',
-                        type=str,
-                        help='output CSV file, e.g. data/output.csv')
-
-    parser.add_argument('--samples',
-                        type=int,
-                        default=DEFAULT_SAMPLES,
-                        help='number of samples to generate (default: {})'.format(DEFAULT_SAMPLES))
-
-    return parser.parse_args()
+def values_generator(min_value: int = 0, max_value: int = 100000000):
+    """Function to generate values for tests"""
+    for op in ops:
+        mkdir(op)
+        for elements_quantity in (100, 500, 10**3, 5*(10**3), 10**4, 25*(10*3), 5*(10**4), 10**5, 25*(10**4), 5*(10**5), 75*(10**4), 10**6, 25*(10**5), 5*(10**6)):
+            with open(f'{op}/data({elements_quantity}).txt', "a") as inp:
+                for i in range(elements_quantity):
+                    value = randint(min_value, max_value)
+                    inp.write(str(value) + " ")
+                inp.write("\n")
 
 
 if __name__ == '__main__':
-    args = parse_args()
-
-    # валидация аргументов
-    if args.samples < 0:
-        raise ValueError('Number of samples must be greater than 0.')
-
-    # запись данных в файл
-    with open(args.output, 'w') as file:
-        for i in range(args.samples - 1):
-            file.write('{},'.format(i))
-        file.write(str(args.samples - 1))
+    help_message = """"""
+    values_generator()
+    print('successfully')

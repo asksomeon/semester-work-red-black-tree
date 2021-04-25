@@ -39,8 +39,8 @@ namespace itis {
 
   class RBtree{
     struct node_st{node_st *p1,*p2; int value; bool red;}; // структура узла
-    node_st *tree_root;                 //!< корень
-    int nodes_count;                    //!< число узлов дерева
+    node_st *tree_root{};                 //!< корень
+    int nodes_count{};                    //!< число узлов дерева
    private:
     node_st *NewNode(int value);        //!< выделение новой вешины
     void DelNode(node_st*);             //!< удаление вершины
@@ -58,8 +58,11 @@ namespace itis {
     void Show();                        //!< вывод дерева
     check_code Check();                 //!< проверка дерева
     bool TreeWalk(bool*,int);           //!< обход дерева и сверка значений с массивом
+    RBtree(int i);
+
+    void Show(node_st*,int,char);
    private: // отладочная часть
-    void Show(node_st*,int,char);       //!< вывод дерева, рекурсивная часть
+    //!< вывод дерева, рекурсивная часть
     check_code Check(node_st*,int,int&);//!< проверка дерева (рекурсивная часть)
     bool TreeWalk(node_st*,bool*,int);  //!< обход дерева и сверка значений с массивом (рекурсивная часть)
    public:
@@ -71,22 +74,16 @@ namespace itis {
     void Remove(int);       //!< удалить значение
     int GetNodesCount();    //!< узнать число узлов
   };
-
-
-  RBtree::RBtree()
+  inline RBtree::RBtree()
   {
     tree_root=0;
     nodes_count=0;
   }
 
-  RBtree::~RBtree()
+  inline RBtree::~RBtree()
   {
     Clear(tree_root);
   }
 
-  int RBtree::GetNodesCount()
-  {
-    return nodes_count;
-  }
 
 }  // namespace itis

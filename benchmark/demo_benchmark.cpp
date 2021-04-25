@@ -23,7 +23,7 @@ int main() {
   for(string elem : files) {
     for (int i = 0; i < trials; i++) {
       string line = "1";
-      auto input_file = ifstream(path + "/find/data(5000).txt");
+      auto input_file = ifstream(path + "/search/data(100).txt");
 
       // здесь находится участок кода, время которого необходимо замерить
 
@@ -34,15 +34,15 @@ int main() {
           if (line == "") {
             break;
           }
-          rBtree.insert(stoi(line));
+          rBtree.Insert(stoi(line));
         }
       }
       const auto time_point_before = chrono::steady_clock::now(); //find, remove, splay, split
-      rBtree.find(94879890);
+      rBtree.Find(20438071);
 //      sTree.remove(78733373);
       const auto time_point_after = chrono::steady_clock::now();
-      Node *curr = sTree.root;
-      sTree.Clear(curr);
+      //Node *curr = sTree.root;
+      //rBtree.Clear();
       input_file.close();
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();

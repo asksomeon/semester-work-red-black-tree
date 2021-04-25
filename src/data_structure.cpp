@@ -263,7 +263,7 @@ namespace itis {
   }
 
   // вывод дерева
-  void RBtree::Show()
+   void RBtree::Show()
   {
     printf("[tree]\n");
     Show(tree_root,0,'*');
@@ -350,6 +350,13 @@ namespace itis {
 }
     return false;
   }
+
+  int RBtree::GetNodesCount()
+  {
+    return nodes_count;
+  }
+
+  RBtree::RBtree(int i) {}
 
 
 }  // namespace itis

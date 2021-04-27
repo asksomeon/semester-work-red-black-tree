@@ -63,8 +63,10 @@ _Краткое описание семестрового проекта. Сле
 возможности IDE):
 Берёте это: https://github.com/asksomeon/semester-work-red-black-tree.git , 
 копируете(Ctrl+С).
+
 Запускаете, допустим, CLion, там должна быть кнопочка 
 Clone либо же в панели наверху находите Git, нажимаете, видите Clone... 
+
 Вставляете URL и нажимаете на кнопочку Clone.
 
 Если нужны тесты, то в semester-work-red-black-tree находите benchmark и demo_benchmark.

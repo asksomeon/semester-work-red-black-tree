@@ -4,7 +4,7 @@
 #include <string_view>  // string_view
 #include <chrono>       // high_resolution_clock, duration_cast, nanoseconds
 
-// подключаем вашу структуру данных
+
 #include "data_structure.hpp"
 
 using namespace std;
@@ -14,6 +14,10 @@ using namespace itis;
 static constexpr auto kDatasetPath = string_view{PROJECT_DATASET_DIR};
 
 int main() {
+  /* Так-то тестовые данные уже сгенерированы, но если нужны новые, то переходим в dataset, удаляем три папочки:
+   * insert, remove и search. Переходим в  generate_csv_dataset.py, нажимаем на зеленую стрелочку. Оп, появились.
+   * Если не нужны, то смотрим ниже.
+   */
   const auto path = string(kDatasetPath);
   cout << "Path to the 'dataset/' folder: " << path << endl;
 
@@ -23,13 +27,14 @@ int main() {
   for(string elem : files) {
     for (int i = 0; i < trials; i++) {
       string line = "1";
-      auto input_file = ifstream(path + "/search/data(100).txt");
+      //Вставляете путь к файлу, из которого хотите брать данные
+      // Пример
+      auto input_file = ifstream(path + "/insert/data(5000000).txt");
 
-      // здесь находится участок кода, время которого необходимо замерить
 
-//      const auto time_point_before = chrono::steady_clock::now(); - insert
       if (input_file) {
         while (line != "") {
+
           getline(input_file, line);
           if (line == "") {
             break;
@@ -37,12 +42,11 @@ int main() {
           rBtree.Insert(stoi(line));
         }
       }
-      const auto time_point_before = chrono::steady_clock::now(); //find, remove, splay, split
-      rBtree.Find(20438071);
-//      sTree.remove(78733373);
+      const auto time_point_before = chrono::steady_clock::now();
+      // Это для операции, время которой замеряется(Insert, Remove или Find), и элемент, с которым её проворачиваете
+      // Пример:
+      rBtree.Insert(145678);
       const auto time_point_after = chrono::steady_clock::now();
-      //Node *curr = sTree.root;
-      //rBtree.Clear();
       input_file.close();
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
